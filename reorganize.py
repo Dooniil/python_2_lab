@@ -29,3 +29,12 @@ if __name__ == '__main__':
         pathlib.Path.mkdir(pathlib.Path.cwd() / 'Archive')
         for src in archive:
             shutil.move(src, pathlib.Path.cwd() / 'Archive')
+
+    files = glob(f'{namespace.source[0]}\\*.*')
+    sizes: Dict[str, int] = {file : os.path.getsize(file) for file in files}
+    small: list = [k for k, v in sizes.items() if v < namespace.size[0]]
+
+    if small:
+        pathlib.Path.mkdir(pathlib.Path.cwd() / 'Small')
+        for src in small:
+            shutil.move(src, pathlib.Path.cwd() / 'Small')
